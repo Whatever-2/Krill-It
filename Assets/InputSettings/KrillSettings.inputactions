@@ -1,6 +1,6 @@
 {
     "version": 1,
-    "name": "PlayerInput",
+    "name": "KrillSettings",
     "maps": [
         {
             "name": "Gameplay",
@@ -131,6 +131,34 @@
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
+                }
+            ]
+        },
+        {
+            "name": "UI",
+            "id": "919b7d95-147c-4567-bc19-d54607ccb011",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "6442c2c5-8341-49db-b3a1-d605a7d82c3d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "fb128ad0-30c5-4d2b-93a2-cddca5d7c2e2",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

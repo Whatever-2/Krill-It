@@ -38,6 +38,19 @@ public class Player : MonoBehaviour
         // Horizontal movement
         rb.linearVelocity = new Vector2(direction.x * speed, rb.linearVelocity.y);
 
+        //vertical movement
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x, direction.y * speed);
+
+        // Flip the player sprite based on movement direction
+        if (direction.x > 0)
+        {
+            transform.localScale = new Vector3(1, 1, 1);
+        }
+        else if (direction.x < 0)
+        {
+            transform.localScale = new Vector3(-1, 1, 1);
+        }
+
         // Shoot
         if (Keyboard.current.spaceKey.wasPressedThisFrame)
         {
@@ -80,6 +93,9 @@ public class Player : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = true;
+        }else
+        {
+            isGrounded = false;
         }
     }
 

@@ -119,6 +119,103 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &169892517 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 524429604621533422, guid: b03b72f8dc239e749b8d6d21daa0392b, type: 3}
+  m_PrefabInstance: {fileID: 8828922528799277854}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &169892518 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -6442043778140134570, guid: b03b72f8dc239e749b8d6d21daa0392b, type: 3}
+  m_PrefabInstance: {fileID: 8828922528799277854}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 169892517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.PlayerInput
+--- !u!114 &169892521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 169892517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 863346cebd0728c46a85ddc4a13f043d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Player
+  FirePoint: {fileID: 0}
+  bulletPrefab: {fileID: 0}
+  playerInput: {fileID: 169892518}
+  speed: 5
+  RollDist: 12
+--- !u!70 &169892522
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 169892517}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 1, y: 2}
+  m_Direction: 0
+--- !u!50 &169892523
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 169892517}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &710492811
 GameObject:
   m_ObjectHideFlags: 0
@@ -323,7 +420,16 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 524429604621533422, guid: b03b72f8dc239e749b8d6d21daa0392b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 169892521}
+    - targetCorrespondingSourceObject: {fileID: 524429604621533422, guid: b03b72f8dc239e749b8d6d21daa0392b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 169892523}
+    - targetCorrespondingSourceObject: {fileID: 524429604621533422, guid: b03b72f8dc239e749b8d6d21daa0392b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 169892522}
   m_SourcePrefab: {fileID: 100100000, guid: b03b72f8dc239e749b8d6d21daa0392b, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

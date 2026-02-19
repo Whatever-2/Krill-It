@@ -3,15 +3,20 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
-    public Transform FirePoint;
+    public Camera mainCamera;
     public GameObject bulletPrefab;
     public PlayerInput playerInput;
-
+    
+    public Transform FirePoint;
+    
     private InputAction rollAction;
     private InputAction interactAction;
     private InputAction moveAction;
     private InputAction shootAction;
 
+
+    private Vector2 LastDirection;
+    private Vector2 velocity;
     public float speed = 5f;
     public float RollDist = 12f;   //roll distance
 
@@ -35,11 +40,17 @@ public class Player : MonoBehaviour
     {
         direction = moveAction.ReadValue<Vector2>();
 
-        // Horizontal movement
-        rb.linearVelocity = new Vector2(direction.x * speed, rb.linearVelocity.y);
+        if (moveAction.IsPressed())
+        {
+            LastDirection = direction;
+        }else if (moveAction.WasReleasedThisFrame())
+        {
+            LastDirection = direction;
+        }
 
-        //vertical movement
-        rb.linearVelocity = new Vector2(rb.linearVelocity.x, direction.y * speed);
+        velocity = speed * direction * Time.deltaTime;
+
+        transform.Translate(velocity);
 
         // Flip the player sprite based on movement direction
         if (direction.x > 0)
@@ -52,21 +63,28 @@ public class Player : MonoBehaviour
         }
 
         // Shoot
-        if (Keyboard.current.spaceKey.wasPressedThisFrame)
+        if (shootAction.WasPressedThisFrame())
         {
             Shoot();
         }
 
         // interact
-        if (Keyboard.current.spaceKey.wasPressedThisFrame)
+        if (interactAction.WasPressedThisFrame())
         {
             Interact();
         }
 
-        if (Keyboard.current.leftShiftKey.wasPressedThisFrame)
+        if (rollAction.WasPressedThisFrame() )
         {
             Roll();
         }
+
+        //firepoint to mouse position
+        Vector3 mousePos = mainCamera.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+        Vector2 firePointDirection = (mousePos - transform.position).normalized;
+        float angle = Mathf.Atan2(firePointDirection.y, firePointDirection.x) * Mathf.Rad2Deg;
+        FirePoint.rotation = Quaternion.Euler(0, 0, angle);
+
 
     }
 

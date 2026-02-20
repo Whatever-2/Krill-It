@@ -74,7 +74,7 @@ public class Player : MonoBehaviour
             Interact();
         }
 
-        if (rollAction.WasPressedThisFrame() )
+        if (rollAction.WasPressedThisFrame() && isGrounded)
         {
             Roll();
         }

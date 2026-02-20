@@ -3,9 +3,15 @@ using TMPro;
 
 public class ScoreManager : MonoBehaviour
 {
+    public static ScoreManager Money;
     int score;
     public TMP_Text scoreText;
     //public text scoretext;legacy text system
+
+    void Awake()
+    {
+        Money = this;
+    }
 
     void Start()
     {
@@ -13,10 +19,10 @@ public class ScoreManager : MonoBehaviour
         scoreText.text = score.ToString();
     }
 
-    public void AddScore()
+    public void AddScore(int amount)
     {
-        score++;
-        scoreText.text = score.ToString();
+        score += amount;
+        scoreText.text = "Gold: " + score;
 
     }
 

@@ -1,3 +1,4 @@
+using System.Runtime.Serialization;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -25,9 +26,17 @@ public class Player : MonoBehaviour
 
     private bool isGrounded = true;
 
+    //bullet
+    [SerializeField] private AnimationCurve trajectoryAnimationCurve;
+    [SerializeField] private float bulletTravelTime = 0.7f;
+    [SerializeField] private float bulletHeight = 1f;
+    public float shooterTimer = 0.5f; // Time in seconds for the shooter to be active
+    private float timer;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        if (mainCamera == null) mainCamera = Camera.main;
 
         
         rollAction = playerInput.actions.FindAction("Roll");
@@ -38,6 +47,8 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        
+
         direction = moveAction.ReadValue<Vector2>();
 
         if (moveAction.IsPressed())
@@ -61,11 +72,16 @@ public class Player : MonoBehaviour
         {
             transform.localScale = new Vector3(-1, 1, 1);
         }
-
+        
         // Shoot
+        timer -= Time.deltaTime;
         if (shootAction.WasPressedThisFrame())
         {
-            Shoot();
+            if (timer < 0)
+            {
+                Shoot();
+                timer = shooterTimer; // Reset the timer after shooting
+            }
         }
 
         // interact
@@ -78,13 +94,6 @@ public class Player : MonoBehaviour
         {
             Roll();
         }
-
-        //firepoint to mouse position
-        Vector3 mousePos = mainCamera.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-        Vector2 firePointDirection = (mousePos - transform.position).normalized;
-        float angle = Mathf.Atan2(firePointDirection.y, firePointDirection.x) * Mathf.Rad2Deg;
-        FirePoint.rotation = Quaternion.Euler(0, 0, angle);
-
 
     }
 
@@ -103,7 +112,19 @@ public class Player : MonoBehaviour
 
     public void Shoot()
     {
-        Instantiate(bulletPrefab, FirePoint.position, FirePoint.rotation);
+            var go = Instantiate(bulletPrefab, FirePoint.position, FirePoint.rotation);
+            var projectile = go.GetComponent<BulletController>();
+            if (projectile != null)
+            {
+                Vector3 mouseScreen = Mouse.current.position.ReadValue();
+                float zDist = transform.position.z - (mainCamera != null ? mainCamera.transform.position.z : 0f);
+                Vector3 mouseWorld = (mainCamera != null)
+                    ? mainCamera.ScreenToWorldPoint(new Vector3(mouseScreen.x, mouseScreen.y, zDist))
+                    : new Vector3(mouseScreen.x, mouseScreen.y, transform.position.z);
+                mouseWorld.z = FirePoint.position.z;
+                
+                projectile.InitializeCurve(FirePoint.position, mouseWorld, trajectoryAnimationCurve, bulletTravelTime, bulletHeight);
+            }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

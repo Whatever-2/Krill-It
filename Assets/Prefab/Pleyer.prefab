@@ -142,6 +142,42 @@ MonoBehaviour:
   FirePoint: {fileID: 6335841274443022921}
   speed: 5
   RollDist: 12
+  trajectoryAnimationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.93556
+      outSlope: 0.93556
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.5325419
+      value: 0.49822485
+      inSlope: -0.0038519204
+      outSlope: -0.0038519204
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1.0622711
+      value: -0.001449585
+      inSlope: -0.9432638
+      outSlope: -0.9432638
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  bulletTravelTime: 0.7
+  bulletHeight: 1
+  shooterTimer: 10
 --- !u!1 &8502500099366242073
 GameObject:
   m_ObjectHideFlags: 0

@@ -16,6 +16,9 @@ public class BulletController : MonoBehaviour
     [SerializeField] private float heightScale = 1f;
     [SerializeField] private float bulletSpeed = 10f;  // speed along direction
 
+    //experimenting on enableable targeting
+    [SerializeField] private bool LockOnTarget = false;
+
     private Vector3 startPos;
     private Vector3 direction;  // stores target position for lerp
     private float elapsed;

@@ -4,6 +4,8 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
+    public int maxHealth = 20;
+    public int currentHealth;
     public Camera mainCamera;
     public GameObject bulletPrefab;
     public PlayerInput playerInput;
@@ -35,6 +37,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        currentHealth = maxHealth;
         rb = GetComponent<Rigidbody2D>();
         if (mainCamera == null) mainCamera = Camera.main;
 
@@ -48,7 +51,6 @@ public class Player : MonoBehaviour
     private void Update()
     {
         
-
         direction = moveAction.ReadValue<Vector2>();
 
         if (moveAction.IsPressed())
@@ -138,4 +140,12 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+        if (currentHealth <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
 }

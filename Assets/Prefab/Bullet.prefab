@@ -178,19 +178,19 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
-      inSlope: 2
-      outSlope: 2
-      tangentMode: 0
+      value: 0.5
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 8.273895
-      value: 0.145607
+      time: 1
+      value: 0.5
       inSlope: 0
       outSlope: 0
-      tangentMode: 0
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0
@@ -198,8 +198,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   travelTime: 0.7
-  heightScale: 1
-  bulletSpeed: 10
+  heightScale: 5.62
 --- !u!114 &4449606213914669861
 MonoBehaviour:
   m_ObjectHideFlags: 0

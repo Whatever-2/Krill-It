@@ -3,6 +3,8 @@ using UnityEngine.InputSystem;
 
 public class BulletController : MonoBehaviour
 {
+    //PlayerBulletController
+
     private Camera mainCam;
     private Rigidbody2D rb;
 
@@ -14,20 +16,18 @@ public class BulletController : MonoBehaviour
     [SerializeField] private AnimationCurve trajectoryCurve;
     [SerializeField] private float travelTime = 0.7f;
     [SerializeField] private float heightScale = 1f;
-    [SerializeField] private float bulletSpeed = 10f;  // speed along direction
-
-    //experimenting on enableable targeting
-    [SerializeField] private bool LockOnTarget = false;
-
+    
+   
     private Vector3 startPos;
     private Vector3 direction;  // stores target position for lerp
     private float elapsed;
-    private bool useCurve = false;
-
     // Track last movement direction and rotation
     private Vector3 lastDirection = Vector3.zero;
     private Quaternion lastRotation = Quaternion.identity;
     private Vector3 lastVelocity = Vector3.zero;
+    private bool useCurve = true;
+
+
 
     void Awake()
     {

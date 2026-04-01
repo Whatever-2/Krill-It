@@ -3,7 +3,7 @@ using UnityEngine;
 public class EnemyStats : MonoBehaviour
 {
     public int damage;
-    public Player playerHealth;
+    public Shooter playerHealth;
     public int EHealth = 100;
     public int currentEHealth;
 

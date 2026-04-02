@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -6442043778140134570}
   - component: {fileID: 1863450240898844978}
   m_Layer: 0
-  m_Name: Pleyer
+  m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -144,6 +144,7 @@ MonoBehaviour:
   playerInput: {fileID: -6442043778140134570}
   shootRange: {fileID: 0}
   shootRangeDistance: 5
+  shootRangeScale: {x: 1, y: 1}
   shootRangeActive: 1
   FirePoint: {fileID: 6335841274443022921}
   speed: 5

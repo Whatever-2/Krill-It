@@ -63,8 +63,6 @@ public class Shooter : MonoBehaviour
 
     private void Update()
     {
-        
-        
         if (!isTurret)
         {
             direction = moveAction.ReadValue<Vector2>();

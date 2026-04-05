@@ -5,11 +5,11 @@ public class EnemyStats : MonoBehaviour
     public int damage;
     public Shooter playerHealth;
     public int EHealth = 100;
-    public int currentEHealth;
+    public int currentHealth;
 
     public void Start()
     {
-        currentEHealth = EHealth;
+        currentHealth = EHealth;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -22,8 +22,8 @@ public class EnemyStats : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        currentEHealth -= damage;
-        if (currentEHealth <= 0)
+        currentHealth -= damage;
+        if (currentHealth <= 0)
         {
             Destroy(gameObject);
         }

@@ -53,14 +53,8 @@ public class EnemyStats : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-<<<<<<< HEAD
         currentHealth -= damage;
         if (currentHealth <= 0)
-=======
-        currentEHealth -= damage;
-
-        if (currentEHealth <= 0)
->>>>>>> parent of 35e4700 (Revert "added gold drop rate")
         {
             DropMoney();
             Destroy(gameObject);

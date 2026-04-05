@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Runtime.Serialization;
-using UnityEngine;
 using UnityEngine.InputSystem;
 
 
@@ -34,11 +33,18 @@ public class TurretScript : MonoBehaviour
 
     private void Start()
     {
+
         currentHealth = maxHealth;
         rb = GetComponent<Rigidbody2D>();
         if (mainCamera == null) mainCamera = Camera.main;
         timer = shooterTimer; // Initialize timer
-
+        //instantiate scale of shoot range indicator
+        if (shootRange != null)
+        {
+            float diameter = shootRangeDistance * 2f;
+            shootRange.transform.localScale = new Vector3(diameter * shootRangeScale.x, diameter * shootRangeScale.y, 1f); // circle when shootRangeScale is (1,1), oval otherwise
+        }
+        
     }
 
     private void Update()

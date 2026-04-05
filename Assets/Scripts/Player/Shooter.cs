@@ -34,10 +34,6 @@ public class Shooter : MonoBehaviour
 
     private bool isGrounded = true;
 
-    //experimenting on enableable targeting
-    [SerializeField] private bool isTurret = false;
-
-
 
     //bullet
     [SerializeField] private AnimationCurve trajectoryAnimationCurve;
@@ -52,19 +48,17 @@ public class Shooter : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         if (mainCamera == null) mainCamera = Camera.main;
         timer = shooterTimer; // Initialize timer
-        if(!isTurret)
-        {
+
         rollAction = playerInput.actions.FindAction("Roll");
         interactAction = playerInput.actions.FindAction("Interact");
         moveAction = playerInput.actions.FindAction("Move");
         shootAction = playerInput.actions.FindAction("Shoot");
-        }
+        
     }
 
     private void Update()
     {
-        if (!isTurret)
-        {
+
             direction = moveAction.ReadValue<Vector2>();
 
         if (moveAction.IsPressed())
@@ -99,10 +93,8 @@ public class Shooter : MonoBehaviour
         {
             Roll();
         }
-
-        }
-        
-        // Shoot
+    
+     // Shoot
     
         timer -= Time.deltaTime; // Decrease the timer by the time elapsed since the last frame
 
@@ -111,8 +103,6 @@ public class Shooter : MonoBehaviour
         {
             shootAction = playerInput.actions.FindAction("Shoot");
         }
-        if (!isTurret ) //player behavior shooting when mouse is clicked
-        {
             if (shootAction.WasPressedThisFrame() )
             {
                 if (timer < 0)
@@ -121,21 +111,6 @@ public class Shooter : MonoBehaviour
                     resetTimer(); // Reset the timer after shooting
                 }   
             }
-        }else if (isTurret) //setup for turret behavior auto shooting based on shooter timer
-        {
-            CheckRangeActive(); // Check if any enemies are within the shoot range distance and update the shoot range active state
-            if (timer < 0)
-            {
-                if (shootRangeActive) // Only check for shooting if the shoot range indicator is active
-                {
-                    Shoot();
-                    resetTimer(); // Reset the timer after shooting
-                }
-                
-            }
-        }
-       
-
     }
 
     public void Roll()
@@ -156,9 +131,6 @@ public class Shooter : MonoBehaviour
         var go = Instantiate(bulletPrefab, FirePoint.position, FirePoint.rotation);
         var projectile = go.GetComponent<BulletController>();
         
-        
-        if (!isTurret)
-        {
             if (projectile != null)
             {
                 Vector3 mouseScreen = Mouse.current.position.ReadValue();
@@ -170,78 +142,6 @@ public class Shooter : MonoBehaviour
                 
                 projectile.InitializeCurve(FirePoint.position, mouseWorld, trajectoryAnimationCurve, bulletTravelTime, bulletHeight);
             }
-        }else if (isTurret)
-        {   //TARGETS NEAREST ENEMY INSTEAD OF MOUSE POSITION
-         
-            if (projectile != null)
-            {
-                // Find the nearest enemy bsed on range of shootRangeDistance
-                if (shootRange != null)
-                {
-                    float diameter = shootRangeDistance * 2f;
-                    shootRange.transform.localScale = new Vector3(diameter * shootRangeScale.x, diameter * shootRangeScale.y, 1f); // circle when shootRangeScale is (1,1), oval otherwise
-                }
-
-                GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-                GameObject nearestEnemy = null;
-                float minDistance = Mathf.Infinity;
-                Vector3 turretPos = transform.position;
-
-                foreach (GameObject enemy in enemies)
-                {
-                    float distance = Vector3.Distance(turretPos, enemy.transform.position);
-                    
-                    if (IsWithinShootRange(enemy.transform.position)) // Check if the enemy is within the shoot range shape
-                    {
-                        if (distance < minDistance)
-                        {
-                            minDistance = distance;
-                            nearestEnemy = enemy;
-                        }
-                    }
-                }
-
-                if (nearestEnemy != null)
-                {
-                    projectile.InitializeCurve(FirePoint.position, nearestEnemy.transform.position, trajectoryAnimationCurve, bulletTravelTime, bulletHeight);
-                }
-            }
-        }
-
-
-    }
-
-    private bool IsWithinShootRange(Vector3 targetPosition)
-    {
-        Vector2 offset = targetPosition - transform.position;
-        float radiusX = shootRangeDistance * shootRangeScale.x;
-        float radiusY = shootRangeDistance * shootRangeScale.y;
-
-        if (Mathf.Approximately(radiusX, radiusY))
-        {
-            return offset.sqrMagnitude <= (radiusX * radiusX);
-        }
-
-        float normalizedX = offset.x / radiusX;
-        float normalizedY = offset.y / radiusY;
-        return (normalizedX * normalizedX) + (normalizedY * normalizedY) <= 1f;
-    }
-
-    private void CheckRangeActive()
-    {
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        bool enemyInRange = false;
-
-        foreach (GameObject enemy in enemies)
-        {
-            if (IsWithinShootRange(enemy.transform.position))
-            {
-                enemyInRange = true;
-                break; // No need to check further if at least one enemy is in range
-            }
-        }
-
-        shootRangeActive = enemyInRange; // Set the shoot range active state based on whether an enemy is in range
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

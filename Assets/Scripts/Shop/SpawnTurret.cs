@@ -1,11 +1,12 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class SpawnTurret : MonoBehaviour
 {
     [SerializeField] private Camera mainCamera;
     [SerializeField] private GameObject[] turretPrefab;
-    [SerializeField] private TMPro.TextMeshProUGUI moneyText;
+    [SerializeField] private TextMeshProUGUI moneyText;
     [SerializeField] private int[] turretCost = { 100 };
 
     private bool isPlacingTurret = false;
@@ -24,6 +25,15 @@ public class SpawnTurret : MonoBehaviour
         {
             Debug.LogWarning("Money text is not assigned. CanAffordTurret will fail if called.");
         }
+        if (mainCamera == null)
+        {
+            mainCamera = Camera.main;
+            if (mainCamera == null)
+            {
+                Debug.LogError("Main Camera not found. Please assign a camera to the SpawnTurret script.");
+            }
+        }
+
     }
 
     void Update()
@@ -100,7 +110,6 @@ public class SpawnTurret : MonoBehaviour
         DestroyCurrentGhost();
         isPlacingTurret = false;
         currentTurretIndex = -1;
-        PayForTurret(currentTurretIndex);
     }
 
     private Vector3 GetMouseWorldPosition()
@@ -161,5 +170,7 @@ public class SpawnTurret : MonoBehaviour
 
         playerMoney -= turretCost[turretIndex];
         moneyText.text = playerMoney.ToString();
+
+
     }
 }

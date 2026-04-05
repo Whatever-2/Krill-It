@@ -44,7 +44,10 @@ public class TurretScript : MonoBehaviour
             float diameter = shootRangeDistance * 2f;
             shootRange.transform.localScale = new Vector3(diameter * shootRangeScale.x, diameter * shootRangeScale.y, 1f); // circle when shootRangeScale is (1,1), oval otherwise
         }
-        
+        //initiate enemy detection for shoot range
+        CheckRangeActive(); // Check if any enemies are within the shoot range distance and update the shoot range active state
+
+
     }
 
     private void Update()
@@ -56,6 +59,14 @@ public class TurretScript : MonoBehaviour
 
 
             CheckRangeActive(); // Check if any enemies are within the shoot range distance and update the shoot range active state
+
+            // Update shoot range indicator scale
+            if (shootRange != null)
+            {
+                float diameter = shootRangeDistance * 2f;
+                shootRange.transform.localScale = new Vector3(diameter * shootRangeScale.x, diameter * shootRangeScale.y, 1f);
+            }
+
             if (timer < 0)
             {
                 if (shootRangeActive) // Only check for shooting if the shoot range indicator is active
@@ -72,17 +83,15 @@ public class TurretScript : MonoBehaviour
     {
         var go = Instantiate(bulletPrefab, FirePoint.position, FirePoint.rotation);
         var projectile = go.GetComponent<BulletController>();
+        projectile.isTurretBullet = true;
 
         //TARGETS NEAREST ENEMY INSTEAD OF MOUSE POSITION
          
             if (projectile != null)
             {
-                // Find the nearest enemy bsed on range of shootRangeDistance
-                if (shootRange != null)
-                {
-                    float diameter = shootRangeDistance * 2f;
-                    shootRange.transform.localScale = new Vector3(diameter * shootRangeScale.x, diameter * shootRangeScale.y, 1f); // circle when shootRangeScale is (1,1), oval otherwise
-                }
+                // Find the nearest enemy based on range
+
+                Collider2D rangeCollider = shootRange != null ? shootRange.GetComponent<Collider2D>() : null;
 
                 GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
                 GameObject nearestEnemy = null;
@@ -93,7 +102,17 @@ public class TurretScript : MonoBehaviour
                 {
                     float distance = Vector3.Distance(turretPos, enemy.transform.position);
                     
-                    if (IsWithinShootRange(enemy.transform.position)) // Check if the enemy is within the shoot range shape
+                    bool inRange = false;
+                    if (rangeCollider != null)
+                    {
+                        inRange = rangeCollider.OverlapPoint(enemy.transform.position);
+                    }
+                    else
+                    {
+                        inRange = IsWithinShootRange(enemy.transform.position);
+                    }
+
+                    if (inRange)
                     {
                         if (distance < minDistance)
                         {
@@ -128,19 +147,46 @@ public class TurretScript : MonoBehaviour
 
     private void CheckRangeActive()
     {
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        bool enemyInRange = false;
-
-        foreach (GameObject enemy in enemies)
+        if (shootRange == null)
         {
-            if (IsWithinShootRange(enemy.transform.position))
-            {
-                enemyInRange = true;
-                break; // No need to check further if at least one enemy is in range
-            }
+            shootRangeActive = false;
+            return;
         }
 
-        shootRangeActive = enemyInRange; // Set the shoot range active state based on whether an enemy is in range
+        Collider2D rangeCollider = shootRange.GetComponent<Collider2D>();
+        if (rangeCollider == null)
+        {
+            // Fallback to manual calculation
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            bool enemyInRange = false;
+            foreach (GameObject enemy in enemies)
+            {
+                if (IsWithinShootRange(enemy.transform.position))
+                {
+                    enemyInRange = true;
+                    break;
+                }
+            }
+            shootRangeActive = enemyInRange;
+            return;
+        }
+
+        ContactFilter2D filter = new ContactFilter2D();
+        filter.useTriggers = false;
+        filter.useLayerMask = false; // Adjust if using layers
+        Collider2D[] results = new Collider2D[20];
+        int count = rangeCollider.OverlapCollider(filter, results);
+
+        bool hasEnemy = false;
+        for (int i = 0; i < count; i++)
+        {
+            if (results[i] != null && results[i].CompareTag("Enemy"))
+            {
+                hasEnemy = true;
+                break;
+            }
+        }
+        shootRangeActive = hasEnemy;
     }
 
     public void TakeDamage(int damage)

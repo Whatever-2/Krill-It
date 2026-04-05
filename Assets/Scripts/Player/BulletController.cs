@@ -26,6 +26,7 @@ public class BulletController : MonoBehaviour
     private Quaternion lastRotation = Quaternion.identity;
     private Vector3 lastVelocity = Vector3.zero;
     private bool useCurve = true;
+    public bool isTurretBullet = false;
 
 
 
@@ -76,6 +77,10 @@ public class BulletController : MonoBehaviour
             // Destroy when animation completes
             if (t >= 1f)
             {
+                if (isTurretBullet)
+                {
+                    transform.position = direction;  // Ensure turret bullet reaches target position
+                }
                 Destroy(gameObject);
             }
         }

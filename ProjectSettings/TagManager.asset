@@ -9,7 +9,6 @@ TagManager:
   - Goal
   - Money
   - PoximitySensor
-  - Ground
   layers:
   - Default
   - TransparentFX

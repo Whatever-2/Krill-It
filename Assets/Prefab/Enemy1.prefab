@@ -109,7 +109,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -174,7 +174,3 @@ MonoBehaviour:
   playerHealth: {fileID: 1863450240898844978, guid: b03b72f8dc239e749b8d6d21daa0392b, type: 3}
   EHealth: 100
   currentEHealth: 0
-  moneyPrefab: {fileID: 3759548983540232078, guid: 0df8bcd1408142a41aaa866999969679, type: 3}
-  minMoneyDrop: 1
-  maxMoneyDrop: 5
-  dropForce: 2

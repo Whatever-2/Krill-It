@@ -139,19 +139,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 863346cebd0728c46a85ddc4a13f043d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
+  rollCooldown: 1
+  rollDuration: 0.2
   maxHealth: 20
   currentHealth: 0
   mainCamera: {fileID: 0}
-  bulletPrefab: {fileID: 3860053522259250061, guid: 8371b502d389987449fc7b681de29de0, type: 3}
+  bulletPrefab: {fileID: 8407303878245599790, guid: fe292879b9088954f9876cdd82faadf7, type: 3}
   playerInput: {fileID: -6442043778140134570}
+  speed: 5
+  RollDist: 15
   shootRange: {fileID: 0}
   shootRangeDistance: 5
   shootRangeScale: {x: 1, y: 1}
   shootRangeActive: 1
   FirePoint: {fileID: 6335841274443022921}
-  speed: 5
-  RollDist: 12
-  isTurret: 0
   trajectoryAnimationCurve:
     serializedVersion: 2
     m_Curve:

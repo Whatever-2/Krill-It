@@ -144,6 +144,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   travelTime: 0.7
   heightScale: 0
+  isTurretBullet: 0
 --- !u!114 &6188838399909325871
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -157,7 +158,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GunStats
   damage: 50
-  enemyHealth: {fileID: 6607811423714155817, guid: 41c502f4627a662468098c0fde4dc9aa, type: 3}
+  enemyHealth: {fileID: 4263926928837513552, guid: 3ab3444a5fe9e634bbfdaea57eeb2b42, type: 3}
 --- !u!58 &1974926324152751766
 CircleCollider2D:
   m_ObjectHideFlags: 0

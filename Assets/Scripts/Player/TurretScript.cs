@@ -175,7 +175,7 @@ public class TurretScript : MonoBehaviour
         filter.useTriggers = false;
         filter.useLayerMask = false; // Adjust if using layers
         Collider2D[] results = new Collider2D[20];
-        int count = rangeCollider.OverlapCollider(filter, results);
+        int count = rangeCollider.Overlap(filter, results);
 
         bool hasEnemy = false;
         for (int i = 0; i < count; i++)

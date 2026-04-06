@@ -359,6 +359,7 @@ GameObject:
   - component: {fileID: 7242994099723543597}
   - component: {fileID: 140828815977495505}
   - component: {fileID: 1765053180293353834}
+  - component: {fileID: 3049799701847447366}
   m_Layer: 5
   m_Name: In-game UI
   m_TagString: Untagged
@@ -450,6 +451,19 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &3049799701847447366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4371607733287353746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8017360bb4b4d7d4b85fb1e87229475b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ScoreManager
+  scoreText: {fileID: 0}
 --- !u!1 &4598526981823025648
 GameObject:
   m_ObjectHideFlags: 0
@@ -1322,6 +1336,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 622594d43f064e943b4940459c01ad64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  mainCamera: {fileID: 0}
   turretPrefab:
   - {fileID: 3933972454205678104, guid: 43fab597f0a2db241aa9d6d205089ff6, type: 3}
   moneyText: {fileID: 420516431374950000}

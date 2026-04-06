@@ -4,12 +4,17 @@ using UnityEngine.InputSystem;
 
 public class Shooter : MonoBehaviour
 {
+    public float rollCooldown = 1f;
+
+    public float rollDuration = 0.2f; //Roll duration on how fast it moves
     public int maxHealth = 20;
     public int currentHealth;
     public Camera mainCamera;
     public GameObject bulletPrefab;
     public PlayerInput playerInput;
-    
+    public float speed = 5f;
+    public float RollDist = 12f;   //roll distance
+
     [SerializeField] GameObject shootRange;
     [SerializeField] private float shootRangeDistance = 5f; // Distance for the shoot range indicator
     [SerializeField] private Vector2 shootRangeScale = Vector2.one; // X/Y scale multipliers for the range shape: (1,1)=circle
@@ -17,17 +22,17 @@ public class Shooter : MonoBehaviour
    
 
     public Transform FirePoint;
-    
+
+    private bool isRolling = false; //to check if its rolling
+    private float rollDurationTimer; //to check how long the roll has been active
     private InputAction rollAction;
     private InputAction interactAction;
     private InputAction moveAction;
     private InputAction shootAction;
-
+    private float rollTimer;
 
     private Vector2 LastDirection;
     private Vector2 velocity;
-    public float speed = 5f;
-    public float RollDist = 12f;   //roll distance
 
     private Vector2 direction;
     private Rigidbody2D rb;
@@ -58,8 +63,8 @@ public class Shooter : MonoBehaviour
 
     private void Update()
     {
-
-            direction = moveAction.ReadValue<Vector2>();
+        rollTimer -= Time.deltaTime;
+        direction = moveAction.ReadValue<Vector2>();
 
         if (moveAction.IsPressed())
         {
@@ -69,9 +74,11 @@ public class Shooter : MonoBehaviour
             LastDirection = direction;
         }
 
-        velocity = speed * direction * Time.deltaTime;
-
-        transform.Translate(velocity);
+        //to check if the player is rolling and update the timer
+        if (!isRolling)
+        {
+            rb.linearVelocity = direction * speed;
+        }
 
         // Flip the player sprite based on movement direction
         if (direction.x > 0)
@@ -89,13 +96,23 @@ public class Shooter : MonoBehaviour
             Interact();
         }
 
-        if (rollAction.WasPressedThisFrame() && isGrounded)
+        //roll
+        if (rollAction.WasPressedThisFrame() && isGrounded && rollTimer <= 0f && !isRolling)
         {
             Roll();
         }
-    
-     // Shoot
-    
+
+        if (isRolling) //check if the player is rolling and update the timer
+        {
+            rollDurationTimer -= Time.deltaTime;
+
+            if (rollDurationTimer <= 0f)
+            {
+                isRolling = false;
+            }
+        }
+
+        // Shoot
         timer -= Time.deltaTime; // Decrease the timer by the time elapsed since the last frame
 
         //null check for shoot action since it is not used for turret behavior
@@ -113,11 +130,18 @@ public class Shooter : MonoBehaviour
             }
     }
 
-    public void Roll()
+    public void Roll() //to make the player roll and checks the direction of the roll and applies the velocity to the player
     {
-        Vector2 rollDirection = new Vector2(transform.localScale.x, 0).normalized;
-        rb.AddForce(rollDirection * RollDist, ForceMode2D.Impulse);
-        isGrounded = false;
+        isRolling = true;
+        rollTimer = rollCooldown;
+        rollDurationTimer = rollDuration;
+
+        Vector2 rollDirection = LastDirection.normalized;
+
+        if (rollDirection == Vector2.zero)
+            rollDirection = Vector2.right * transform.localScale.x;
+
+        rb.linearVelocity = rollDirection * RollDist; // use velocity instead of force
     }
 
 
@@ -144,12 +168,17 @@ public class Shooter : MonoBehaviour
             }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision) //to check if the player is grounded and can roll(updated because the last one causes the roll to break)
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = true;
-        }else
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = false;
         }
@@ -168,6 +197,4 @@ public class Shooter : MonoBehaviour
     {
         timer = shooterTimer;
     }
-
-
 }

@@ -3,6 +3,7 @@ using System.Runtime.Serialization;
 using UnityEngine.InputSystem;
 
 
+
 public class TurretScript : MonoBehaviour
 {
 
@@ -33,7 +34,10 @@ public class TurretScript : MonoBehaviour
     [SerializeField] private float bulletHeight = 1f;
     public float shooterTimer = 1.0f; // Time in seconds for the shooter to be active
     private float timer;
-
+    private Animator animator;
+    private float AnimationLength;
+    private bool canPlay = true;
+    [SerializeField] private AnimationClip AttackAnimation;
     private void Start()
     {
 
@@ -49,8 +53,15 @@ public class TurretScript : MonoBehaviour
         }
         //initiate enemy detection for shoot range
         CheckRangeActive(); // Check if any enemies are within the shoot range distance and update the shoot range active state
-
-
+        animator = GetComponent<Animator>();
+        if (animator != null && AttackAnimation != null)
+        {
+            AnimationLength = AttackAnimation.length;
+        }
+        else
+        {
+            Debug.LogWarning("Animator component or AttackAnimation clip is not assigned on turret. Shooting animation will not play.");
+        }
     }
 
     private void Update()
@@ -70,13 +81,22 @@ public class TurretScript : MonoBehaviour
                 shootRange.transform.localScale = new Vector3(diameter * shootRangeScale.x, diameter * shootRangeScale.y, 1f);
             }
 
-            if (timer < 0)
-            {
-                if (shootRangeActive) // Only check for shooting if the shoot range indicator is active
+        
+            if (shootRangeActive) // Only check for shooting if the shoot range indicator is active
                 {
-                    Shoot();
-                    resetTimer(); // Reset the timer after shooting
-                }
+                    //plays shoot animation before instantiating bullet, if animator component exists
+                    if (timer < AnimationLength && canPlay) // Adjust the timing of the shoot animation trigger as needed
+                    {
+                        PlayShootAnimation();
+                        canPlay = false; // Ensure the shoot animation is only triggered once per shooting cycle
+                    }
+                    
+                    if (timer < 0)
+                        {
+                            Shoot();
+                            resetTimer(); // Reset the timer after shooting
+                            canPlay = true; // Allow the shoot animation to be triggered again in the next cycle
+                        }
                 
             }
     }
@@ -84,6 +104,13 @@ public class TurretScript : MonoBehaviour
 
   public void Shoot()
     {
+        if (bulletPrefab == null || FirePoint == null)
+        {
+            Debug.LogError("Bullet prefab or FirePoint is not assigned in the inspector.");
+            return;
+        }
+        
+      
         var go = Instantiate(bulletPrefab, FirePoint.position, FirePoint.rotation);
         var projectile = go.GetComponent<BulletController>();
         projectile.isTurretBullet = true;
@@ -237,5 +264,31 @@ public class TurretScript : MonoBehaviour
         projectile.SetHomingTarget(nearestEnemy.transform);
         projectile.InitializeCurve(FirePoint.position, nearestEnemy.transform.position, trajectoryAnimationCurve, bulletTravelTime, bulletHeight);
     }
+
+    void PlayShootAnimation()
+    {
+        // Gets turret animator component and plays shoot animation, if it exists
+        
+        if (animator != null)
+        {
+            animator.SetTrigger("Shoot");
+        }
+        else
+        {
+            Debug.LogWarning("No Animator component found on turret for shooting animation.");
+
+        }
+
+
+    }
+
+    public void activateAnimator()
+    {
+        if (animator != null)
+        {
+            animator.enabled = true;
+        }
+    }
+
 
 }

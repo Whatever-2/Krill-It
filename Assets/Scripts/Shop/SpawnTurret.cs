@@ -114,17 +114,30 @@ public class SpawnTurret : MonoBehaviour
 
     private void PlaceTurret(Vector3 position)
     {
+
         if (currentTurretIndex < 0 || currentTurretIndex >= turretPrefab.Length)
         {
             Debug.LogError("Invalid turret index for placement.");
             return;
         }
 
-        Instantiate(turretPrefab[currentTurretIndex], position, Quaternion.identity);
+        GameObject turretInstance = Instantiate(turretPrefab[currentTurretIndex], position, Quaternion.identity);
+        //activating animation after instantiating turret, if animator component exists on turret prefab
+         Animator animator = turretInstance.GetComponent<Animator>();
+         if (animator != null)
+         {
+             animator.enabled = true; // Enable animator to play shoot animation
+         }
+         else
+         {
+             Debug.LogWarning("Turret prefab does not have an Animator component. Shoot animation will not play.");
+         }
+         
         PayForTurret(currentTurretIndex);
         DestroyCurrentGhost();
         isPlacingTurret = false;
         currentTurretIndex = -1;
+
     }
 
     private Vector3 GetMouseWorldPosition()
@@ -163,6 +176,11 @@ public class SpawnTurret : MonoBehaviour
         foreach (Collider2D collider in ghost.GetComponentsInChildren<Collider2D>())
         {
             collider.enabled = false;
+        }
+
+        foreach (Animator animator in ghost.GetComponentsInChildren<Animator>())
+        {
+            animator.enabled = false;
         }
     }
 

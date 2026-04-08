@@ -1,17 +1,17 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System;
 
-public class WaveTimer: MonoBehaviour
+public class WaveTimer : MonoBehaviour
 {
-
-    public float waveTime = 30f;          // Time per wave
+    public float waveTime = 30f;
     public int totalWaves = 3;
 
     public TMP_Text timerText;
     public TMP_Text waveText;
-    public TMP_Text resultText;
-    public ScoreManager scoreManager;
+
+    public Action<int> OnWaveStart; //event that tells the wave manager to start the wave, and passes the current wave number so it can spawn the correct enemies
 
     float currentTime;
     int currentWave = 1;
@@ -19,7 +19,6 @@ public class WaveTimer: MonoBehaviour
 
     void Start()
     {
-        resultText.gameObject.SetActive(false);
         StartWave();
     }
 
@@ -42,11 +41,12 @@ public class WaveTimer: MonoBehaviour
     {
         currentTime = waveTime;
         waveText.text = "Wave " + currentWave;
+
+        OnWaveStart?.Invoke(currentWave);//tells the wave manager to start the wave, and passes the current wave number so it can spawn the correct enemies
     }
 
     void EndWave()
     {
-
         if (currentWave < totalWaves)
         {
             currentWave++;

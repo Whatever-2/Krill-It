@@ -775,7 +775,7 @@ GameObject:
   - component: {fileID: 1559002609223598964}
   - component: {fileID: 2586857305369416985}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: Archerfish
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -883,7 +883,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1559002609223598964}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7307495533972139730}
+        m_TargetAssemblyTypeName: SpawnTurret, Assembly-CSharp
+        m_MethodName: SpawnTurretOnCursor
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6227642220615889025
 GameObject:
   m_ObjectHideFlags: 0
@@ -1505,8 +1517,9 @@ MonoBehaviour:
   mainCamera: {fileID: 0}
   turretPrefab:
   - {fileID: 5745746845704510968, guid: 07e8a54ec8d786d4ab83bc480f9f540d, type: 3}
+  - {fileID: 7598805865078924857, guid: a8118eb2e7aa6eb41b5a75e34e86b1bb, type: 3}
   moneyText: {fileID: 6028613044541857063}
-  turretCost: 64000000
+  turretCost: 9600000064000000
 --- !u!1 &8326431890734998806
 GameObject:
   m_ObjectHideFlags: 0

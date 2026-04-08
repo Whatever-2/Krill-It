@@ -15,7 +15,7 @@ public class ScoreManager : MonoBehaviour
 
     void Start()
     {
-        score = 250;
+        score = 500;
         scoreText.text = score.ToString();
     }
 

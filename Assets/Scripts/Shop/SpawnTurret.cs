@@ -59,12 +59,16 @@ public class SpawnTurret : MonoBehaviour
             if (IsValidPlacement(worldPos))
             {
                 PlaceTurret(worldPos);
+                DestroyCurrentGhost();
+                isPlacingTurret = false;
+                currentTurretIndex = -1;
             }
             else
             {
                 Debug.Log("Invalid placement. Please place the turret on the ground.");
             }
         }
+  
     }
 
     public void SpawnTurretOnCursor(int turretIndex)

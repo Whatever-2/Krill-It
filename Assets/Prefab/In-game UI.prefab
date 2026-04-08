@@ -58,14 +58,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.25882354, g: 0.4431373, b: 0.90196085, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: 602395eda5a27d84888deb729db73257, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -553,7 +553,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4073744718332023698
 RectTransform:
   m_ObjectHideFlags: 0
@@ -677,7 +677,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 500
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -761,6 +761,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8017360bb4b4d7d4b85fb1e87229475b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScoreManager
+  cash: 500
   scoreText: {fileID: 6028613044541857063}
 --- !u!1 &5301453927682664911
 GameObject:
@@ -930,7 +931,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -67.2}
+  m_AnchoredPosition: {x: 0, y: -76}
   m_SizeDelta: {x: 0, y: -66.0414}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2748338673379667915
@@ -1162,7 +1163,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -67.2}
+  m_AnchoredPosition: {x: 0, y: -76}
   m_SizeDelta: {x: 0, y: -66.0414}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8927551319676631102
@@ -1278,7 +1279,7 @@ GameObject:
   - component: {fileID: 5766932381312554485}
   - component: {fileID: 5508911386482566028}
   m_Layer: 5
-  m_Name: Button (2)
+  m_Name: Jellyfish
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1387,7 +1388,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5766932381312554485}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7307495533972139730}
+        m_TargetAssemblyTypeName: SpawnTurret, Assembly-CSharp
+        m_MethodName: SpawnTurretOnCursor
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7255055175422781842
 GameObject:
   m_ObjectHideFlags: 0
@@ -1518,8 +1531,9 @@ MonoBehaviour:
   turretPrefab:
   - {fileID: 5745746845704510968, guid: 07e8a54ec8d786d4ab83bc480f9f540d, type: 3}
   - {fileID: 7598805865078924857, guid: a8118eb2e7aa6eb41b5a75e34e86b1bb, type: 3}
+  - {fileID: 9107304310454937131, guid: 1184924b45eba7341869500056e48345, type: 3}
   moneyText: {fileID: 6028613044541857063}
-  turretCost: 9600000064000000
+  turretCost: 9600000064000000c8000000
 --- !u!1 &8326431890734998806
 GameObject:
   m_ObjectHideFlags: 0
@@ -1554,7 +1568,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -65}
+  m_AnchoredPosition: {x: 0, y: -73.8}
   m_SizeDelta: {x: 35.2862, y: -54.0587}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6300947144650075942

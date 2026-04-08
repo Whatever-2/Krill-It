@@ -4,7 +4,7 @@ using TMPro;
 public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager Money;
-    int score;
+    [SerializeField]int cash;
     public TMP_Text scoreText;
     //public text scoretext;legacy text system
 
@@ -15,27 +15,26 @@ public class ScoreManager : MonoBehaviour
 
     void Start()
     {
-        score = 500;
-        scoreText.text = score.ToString();
+        cash = 500;
+        scoreText.text = cash.ToString();
     }
 
     public void AddScore(int amount)
     {
-        score += amount;
-        scoreText.text = score.ToString();
-
+        cash += amount;
+        scoreText.text = cash.ToString();
     }
 
     public void SubScore(int amount)
     {
-        score -= amount;
+        cash -= amount;
 
-        scoreText.text = score.ToString();
+        scoreText.text = cash.ToString();
     }
 
     public int GetScore()
     {
-        return score;
+        return cash;
     }
 
 }

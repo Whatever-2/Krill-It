@@ -274,7 +274,7 @@ MonoBehaviour:
   mainCamera: {fileID: 0}
   bulletPrefab: {fileID: 8407303878245599790, guid: fe292879b9088954f9876cdd82faadf7, type: 3}
   shootRange: {fileID: 1707473730510456432}
-  shootRangeDistance: 2.5
+  shootRangeDistance: 3
   shootRangeScale: {x: 1, y: 1}
   shootRangeActive: 0
   isHoming: 0
@@ -312,9 +312,9 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  bulletTravelTime: 0.91
+  bulletTravelTime: 0.75
   bulletHeight: 0.85
-  shooterTimer: 3.5
+  shooterTimer: 3
   AttackAnimation: {fileID: 7400000, guid: 77289fda14dd3df48836f0572502c3e7, type: 2}
 --- !u!50 &3202927769624078627
 Rigidbody2D:

@@ -831,6 +831,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1702012905982815264, guid: 90b1827c2b4920b4c9394024c04f8935, type: 3}
+      propertyPath: cash
+      value: 750
+      objectReference: {fileID: 0}
     - target: {fileID: 3106927289673170289, guid: 90b1827c2b4920b4c9394024c04f8935, type: 3}
       propertyPath: m_Name
       value: In-game UI

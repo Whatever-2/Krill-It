@@ -18,6 +18,9 @@ public class TurretScript : MonoBehaviour
     [SerializeField] private Vector2 shootRangeScale = Vector2.one; // X/Y scale multipliers for the range shape: (1,1)=circle
     [SerializeField] private bool shootRangeActive = true; // Flag to track if the shoot range indicator is active
    
+    [SerializeField] private bool isHoming = true; // Flag to determine if bullets should home in on targets
+
+
 
     public Transform FirePoint;
     private Vector2 direction;
@@ -126,6 +129,10 @@ public class TurretScript : MonoBehaviour
                 {
                     projectile.InitializeCurve(FirePoint.position, nearestEnemy.transform.position, trajectoryAnimationCurve, bulletTravelTime, bulletHeight);
                 }
+                if (isHoming)
+                {
+                    BulletFollowNearestEnemy(projectile);
+                }
             }
         }
 
@@ -203,5 +210,32 @@ public class TurretScript : MonoBehaviour
         timer = shooterTimer;
     }
 
+    private void BulletFollowNearestEnemy(BulletController projectile)
+    {
+        if (projectile == null)
+            return;
+
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        GameObject nearestEnemy = null;
+        float minDistance = Mathf.Infinity;
+        Vector3 turretPos = transform.position;
+
+        foreach (GameObject enemy in enemies)
+        {
+            float distance = Vector3.Distance(turretPos, enemy.transform.position);
+            if (distance < minDistance)
+            {
+                minDistance = distance;
+                nearestEnemy = enemy;
+            }
+        }
+
+        if (nearestEnemy != null)
+        {
+            projectile.SetHomingTarget(nearestEnemy.transform);
+        }
+        projectile.SetHomingTarget(nearestEnemy.transform);
+        projectile.InitializeCurve(FirePoint.position, nearestEnemy.transform.position, trajectoryAnimationCurve, bulletTravelTime, bulletHeight);
+    }
 
 }

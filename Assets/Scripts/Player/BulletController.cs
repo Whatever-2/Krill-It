@@ -17,7 +17,7 @@ public class BulletController : MonoBehaviour
     [SerializeField] private float travelTime = 0.7f;
     [SerializeField] private float heightScale = 1f;
     
-   
+    private Transform HomingTarget; // Store the current homing target
     private Vector3 startPos;
     private Vector3 direction;  // stores target position for lerp
     private float elapsed;
@@ -68,7 +68,7 @@ public class BulletController : MonoBehaviour
                 if (vel.sqrMagnitude > 1e-6f)
                 {
                     float rot = Mathf.Atan2(vel.y, vel.x) * Mathf.Rad2Deg;
-                    transform.rotation = Quaternion.Euler(0, 0, rot + 90f);
+                    transform.rotation = Quaternion.Euler(0, 0, rot);
                 }
             }
             
@@ -91,9 +91,16 @@ public class BulletController : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+        if (HomingTarget != null)
+        {
+            direction = HomingTarget.position; // Update direction to homing target position
+        }
     }
 
-
+    public void SetHomingTarget(Transform target)
+    {
+        HomingTarget = target;
+    }
     public void InitializeCurve(Vector3 start, Vector3 targetPosition, AnimationCurve curve, float travelTimeSec, float heightScaleMultiplier)
     {
         startPos = start;

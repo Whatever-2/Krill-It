@@ -15,21 +15,20 @@ public class ScoreManager : MonoBehaviour
 
     void Start()
     {
-        score = 0;
+        score = 250;
         scoreText.text = score.ToString();
     }
 
     public void AddScore(int amount)
     {
         score += amount;
-        scoreText.text = "Gold: " + score;
+        scoreText.text = score.ToString();
 
     }
 
-    public void SubScore()
+    public void SubScore(int amount)
     {
-        if (score > 0)
-            score--;
+        score -= amount;
 
         scoreText.text = score.ToString();
     }

@@ -33,6 +33,16 @@ public class SpawnTurret : MonoBehaviour
                 Debug.LogError("Main Camera not found. Please assign a camera to the SpawnTurret script.");
             }
         }
+        // Ensure turretCost array is properly initialized
+        if (turretCost == null || turretCost.Length < turretPrefab.Length)
+        {
+            Debug.LogWarning("Turret cost array is not properly initialized. Defaulting to 100 for all turrets.");
+            turretCost = new int[turretPrefab.Length];
+            for (int i = 0; i < turretCost.Length; i++)
+            {
+                turretCost[i] = 100;
+            }
+        }       
 
     }
 
@@ -107,6 +117,7 @@ public class SpawnTurret : MonoBehaviour
         }
 
         Instantiate(turretPrefab[currentTurretIndex], position, Quaternion.identity);
+        PayForTurret(currentTurretIndex);
         DestroyCurrentGhost();
         isPlacingTurret = false;
         currentTurretIndex = -1;
@@ -168,9 +179,10 @@ public class SpawnTurret : MonoBehaviour
         if (!int.TryParse(moneyText.text, out int playerMoney))
             return;
 
-        playerMoney -= turretCost[turretIndex];
-        moneyText.text = playerMoney.ToString();
-
-
+        ScoreManager scoreManager = moneyText.GetComponent<ScoreManager>();
+        if (scoreManager != null)
+        {
+            scoreManager.SubScore(turretCost[turretIndex]);
+        }
     }
 }

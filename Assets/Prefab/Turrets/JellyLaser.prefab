@@ -57,7 +57,7 @@ Transform:
   m_GameObject: {fileID: 2082904033734510176}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.264, y: -0.014, z: 0}
+  m_LocalPosition: {x: 0.32, y: -0.014, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -369,6 +369,7 @@ MonoBehaviour:
   shootRangeScale: {x: 1, y: 1}
   shootRangeActive: 0
   isHoming: 0
+  isContinuousAttack: 1
   FirePoint: {fileID: 2409331746223988778}
   trajectoryAnimationCurve:
     serializedVersion: 2
@@ -397,7 +398,7 @@ MonoBehaviour:
   bulletTravelTime: 0.15
   bulletHeight: 0
   shooterTimer: 0.15
-  AttackAnimation: {fileID: 7400000, guid: 77289fda14dd3df48836f0572502c3e7, type: 2}
+  AttackAnimation: {fileID: 7400000, guid: f075752c60645114f97c98bc9841ed25, type: 2}
 --- !u!50 &7261506530788356899
 Rigidbody2D:
   serializedVersion: 5
@@ -471,7 +472,7 @@ Animator:
   m_GameObject: {fileID: 9107304310454937131}
   m_Enabled: 0
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5613296a10484f04db4c192d7ac97830, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

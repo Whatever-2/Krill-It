@@ -172,6 +172,7 @@ GameObject:
   - component: {fileID: 7728435718638531981}
   - component: {fileID: 4223060255899810768}
   - component: {fileID: 9046650703347639619}
+  - component: {fileID: 2317411847662592713}
   m_Layer: 0
   m_Name: ArcherfishCanon
   m_TagString: Player
@@ -304,7 +305,7 @@ MonoBehaviour:
   bulletTravelTime: 1
   bulletHeight: 0
   shooterTimer: 2
-  AttackAnimation: {fileID: 0}
+  AttackAnimation: {fileID: 7400000, guid: 914bd3c82f0f8424f81f35485d12d7c6, type: 2}
 --- !u!50 &4223060255899810768
 Rigidbody2D:
   serializedVersion: 5
@@ -368,3 +369,25 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.3
+--- !u!95 &2317411847662592713
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7598805865078924857}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6003309f802cae54fba6372e0854a497, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

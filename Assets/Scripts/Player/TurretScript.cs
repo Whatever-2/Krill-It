@@ -20,6 +20,7 @@ public class TurretScript : MonoBehaviour
     [SerializeField] private bool shootRangeActive = true; // Flag to track if the shoot range indicator is active
    
     [SerializeField] private bool isHoming = true; // Flag to determine if bullets should home in on targets
+    [SerializeField] private bool isContinuousAttack = false; // Flag for continuous attack animation
 
 
 
@@ -83,6 +84,15 @@ public class TurretScript : MonoBehaviour
 
         
             if (shootRangeActive) // Only check for shooting if the shoot range indicator is active
+            {
+                if (isContinuousAttack)
+                {
+                    if (animator != null)
+                    {
+                        animator.SetBool("Shooting", true);
+                    }
+                }
+                else
                 {
                     //plays shoot animation before instantiating bullet, if animator component exists
                     if (timer < AnimationLength && canPlay) // Adjust the timing of the shoot animation trigger as needed
@@ -90,16 +100,25 @@ public class TurretScript : MonoBehaviour
                         PlayShootAnimation();
                         canPlay = false; // Ensure the shoot animation is only triggered once per shooting cycle
                     }
-                    
-                    if (timer < 0)
-                        {
-                            Shoot();
-                            resetTimer(); // Reset the timer after shooting
-                            canPlay = true; // Allow the shoot animation to be triggered again in the next cycle
-                        }
+                }
+                
+                if (timer < 0)
+                {
+                    Shoot();
+                    resetTimer(); // Reset the timer after shooting
+                    canPlay = true; // Allow the shoot animation to be triggered again in the next cycle
+                }
+            }
+            else
+            {
+                if (isContinuousAttack && animator != null && shootRangeActive == false)
+                {
+                    animator.SetBool("Shooting", false);
+                }
+            }
                 
             }
-    }
+    
        
 
   public void Shoot()

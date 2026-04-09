@@ -33,16 +33,7 @@ public class SpawnTurret : MonoBehaviour
                 Debug.LogError("Main Camera not found. Please assign a camera to the SpawnTurret script.");
             }
         }
-        //sets array sizes for turret cost and price tags to match number of turret prefabs, prevents out of bounds errors when trying to access turret cost or price tag for a turret that doesn't have one assigned in the inspector
-        if (turretCost == null || turretCost.Length != turretPrefab.Length)
-        {
-            turretCost = new int[turretPrefab.Length];
-            for (int i = 0; i < turretCost.Length; i++)
-            {
-                turretCost[i] = 100; // Default cost if not set in inspector
-            }
-        }
-        
+      
 
         // Ensure turretCost array is properly initialized
         if (turretCost == null || turretCost.Length < turretPrefab.Length)

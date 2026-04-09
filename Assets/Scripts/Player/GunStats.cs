@@ -24,4 +24,5 @@ public class GunStats : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    
 }

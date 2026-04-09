@@ -8,7 +8,7 @@ public class SpawnTurret : MonoBehaviour
     [SerializeField] private GameObject[] turretPrefab;
     [SerializeField] private TextMeshProUGUI moneyText;
     [SerializeField] private int[] turretCost = { 100 };
-
+    [SerializeField] private TextMeshProUGUI[] PriceTags;
     private bool isPlacingTurret = false;
     private GameObject currentTurretGhost;
     private int currentTurretIndex = -1;
@@ -33,6 +33,17 @@ public class SpawnTurret : MonoBehaviour
                 Debug.LogError("Main Camera not found. Please assign a camera to the SpawnTurret script.");
             }
         }
+        //sets array sizes for turret cost and price tags to match number of turret prefabs, prevents out of bounds errors when trying to access turret cost or price tag for a turret that doesn't have one assigned in the inspector
+        if (turretCost == null || turretCost.Length != turretPrefab.Length)
+        {
+            turretCost = new int[turretPrefab.Length];
+            for (int i = 0; i < turretCost.Length; i++)
+            {
+                turretCost[i] = 100; // Default cost if not set in inspector
+            }
+        }
+        
+
         // Ensure turretCost array is properly initialized
         if (turretCost == null || turretCost.Length < turretPrefab.Length)
         {
@@ -42,7 +53,22 @@ public class SpawnTurret : MonoBehaviour
             {
                 turretCost[i] = 100;
             }
-        }       
+        }  
+        //instantiating price tags     
+        if (PriceTags != null && PriceTags.Length >= turretCost.Length)
+        {
+            for (int i = 0; i < turretCost.Length; i++)
+            {
+                if (PriceTags[i] != null)
+                {
+                    PriceTags[i].text = turretCost[i].ToString();
+                }
+            }
+        }
+            else
+            {
+                Debug.LogWarning("PriceTags array is not properly assigned. Price tags will not display turret costs.");
+            }
 
     }
 

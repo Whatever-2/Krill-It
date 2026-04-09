@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using UnityEngine;
 
 public class SceneLoader : MonoBehaviour
@@ -26,6 +27,7 @@ public class SceneLoader : MonoBehaviour
 
     public void QuitGame()
     {
+        UnityEngine.Debug.Log("Quitting game...");
         Application.Quit();
     }
 

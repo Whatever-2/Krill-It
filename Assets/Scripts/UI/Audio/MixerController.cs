@@ -8,8 +8,9 @@ public class MixerController : MonoBehaviour
 {
     [SerializeField] private AudioMixer Mixer;
     [SerializeField] private Slider masterSlider;
+    [SerializeField] private Slider MusicSlider;
     [SerializeField] private Slider SFXSlider;
-        [SerializeField] private Slider MusicSlider;
+        
     private void Start()
     {
         

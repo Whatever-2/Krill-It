@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 853613604303732938}
   - component: {fileID: 1194120810733424546}
   m_Layer: 0
-  m_Name: Dolphin-Sheet_0
+  m_Name: '[DEMO] Dolphin-Sheet_0'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

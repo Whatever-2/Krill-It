@@ -20,6 +20,7 @@ public class Shooter : MonoBehaviour
     [SerializeField] private Vector2 shootRangeScale = Vector2.one; // X/Y scale multipliers for the range shape: (1,1)=circle
     [SerializeField] private bool shootRangeActive = true; // Flag to track if the shoot range indicator is active
    
+    private Animator animator;
 
     public Transform FirePoint;
 
@@ -58,12 +59,17 @@ public class Shooter : MonoBehaviour
         interactAction = playerInput.actions.FindAction("Interact");
         moveAction = playerInput.actions.FindAction("Move");
         shootAction = playerInput.actions.FindAction("Shoot");
+        animator = GetComponent<Animator>();
         
     }
 
     private void Update()
     {
         rollTimer -= Time.deltaTime;
+
+
+/*
+
         direction = moveAction.ReadValue<Vector2>();
 
         if (moveAction.IsPressed())
@@ -74,20 +80,15 @@ public class Shooter : MonoBehaviour
             LastDirection = direction;
         }
 
+
+*/
+        MoveInput();
+
+
         //to check if the player is rolling and update the timer
         if (!isRolling)
         {
             rb.linearVelocity = direction * speed;
-        }
-
-        // Flip the player sprite based on movement direction
-        if (direction.x > 0)
-        {
-            transform.localScale = new Vector3(1, 1, 1);
-        }
-        else if (direction.x < 0)
-        {
-            transform.localScale = new Vector3(-1, 1, 1);
         }
 
         // interact
@@ -130,6 +131,35 @@ public class Shooter : MonoBehaviour
             }
     }
 
+
+    private void MoveInput()
+    {
+        //=====================Player Input=======================//
+        direction = moveAction.ReadValue<Vector2>();
+
+        if (moveAction.IsPressed())
+        {
+            animator.SetBool("isMoving", true);
+            LastDirection = direction;
+
+            animator.SetFloat("InputX", direction.x);
+            animator.SetFloat("InputY", direction.y);
+            animator.SetFloat("LastInputX", LastDirection.x);
+            animator.SetFloat("LastInputY", LastDirection.y);
+
+        }else if (moveAction.WasReleasedThisFrame())
+        {
+            animator.SetFloat("LastInputX", LastDirection.x);
+            animator.SetFloat("LastInputY", LastDirection.y);
+            animator.SetBool("isMoving", false);
+        }
+
+        velocity = speed * direction * Time.deltaTime;
+
+        transform.Translate(velocity);
+        //========================================================//
+    }
+
     public void Roll() //to make the player roll and checks the direction of the roll and applies the velocity to the player
     {
         isRolling = true;
@@ -157,6 +187,7 @@ public class Shooter : MonoBehaviour
         
             if (projectile != null)
             {
+                animator.SetTrigger("Attack");
                 Vector3 mouseScreen = Mouse.current.position.ReadValue();
                 float zDist = transform.position.z - (mainCamera != null ? mainCamera.transform.position.z : 0f);
                 Vector3 mouseWorld = (mainCamera != null)

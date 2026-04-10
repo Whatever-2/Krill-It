@@ -15,7 +15,7 @@ public class WaveTimer : MonoBehaviour
 
     float currentTime;
     int currentWave = 1;
-    bool gameStopped = false;
+    public bool gameStopped = false;
 
     void Start()
     {
@@ -47,7 +47,7 @@ public class WaveTimer : MonoBehaviour
 
     void EndWave()
     {
-        if (currentWave < totalWaves)
+        if (currentWave < totalWaves ) 
         {
             currentWave++;
             StartWave();
@@ -58,10 +58,13 @@ public class WaveTimer : MonoBehaviour
         }
     }
 
+  
     void StopGame()
     {
         gameStopped = true;
     }
+
+
 
     public int CurrentWave()
     {

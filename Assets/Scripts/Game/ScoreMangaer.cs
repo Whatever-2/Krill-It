@@ -15,7 +15,6 @@ public class ScoreManager : MonoBehaviour
 
     void Start()
     {
-        cash = 500;
         scoreText.text = cash.ToString();
     }
 

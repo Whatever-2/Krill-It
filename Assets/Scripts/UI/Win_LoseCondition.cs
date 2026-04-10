@@ -36,9 +36,8 @@ public class Win_LoseCondition : MonoBehaviour
     void Update()
     {
         CheckLoseCon();
-        CheckWinCon();
 
-        if (isWin)
+        if (waveTimer.gameStopped)
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene(WinSceneIndex);
         }
@@ -59,6 +58,8 @@ public class Win_LoseCondition : MonoBehaviour
             isLose = true;
         }
     }
+/*    
+
     private void CheckWinCon()
     {
         //checks and updates the wave count
@@ -68,6 +69,9 @@ public class Win_LoseCondition : MonoBehaviour
             isWin = true;
         }
     }
+    
+
+*/
 
      private void OnCollisionEnter2D(Collision2D collision)
     {

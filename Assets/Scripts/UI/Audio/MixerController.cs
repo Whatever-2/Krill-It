@@ -11,10 +11,10 @@ public class MixerController : MonoBehaviour
     [SerializeField] private Slider MusicSlider;
     [SerializeField] private Slider SFXSlider;
         
-    private void Start()
+
+    private void Awake()
     {
-        
-            if (PlayerPrefs.HasKey("MasterVolume"))
+        if (PlayerPrefs.HasKey("MasterVolume"))
         {
             LoadVolume();
         }
@@ -24,7 +24,11 @@ public class MixerController : MonoBehaviour
             SetSFXVolume();
             SetMusicVolume();
         }
-            
+    }
+
+    private void Start()
+    {
+  
     }
 
 
@@ -64,7 +68,6 @@ public class MixerController : MonoBehaviour
         SetMusicVolume();
         SetSFXVolume();
     }
-    
  
 
 }

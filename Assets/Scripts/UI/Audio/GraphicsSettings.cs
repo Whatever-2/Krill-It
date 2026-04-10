@@ -13,14 +13,12 @@ public class GraphicsSettings : MonoBehaviour
 
    void Start()
     {
+        InitializeResolutionDropDown(); //initializes resolution dropdown with available resolutions and sets current resolution as default value
+
         if (PlayerPrefs.HasKey("QualitySetting") || PlayerPrefs.HasKey("FullscreenSetting") || PlayerPrefs.HasKey("ResolutionSetting"))
         {
             InitializeSavedSettings(); //initializes saves player pref settings
         }
-
-        
-        InitializeResolutionDropDown(); //initializes resolution dropdown with available resolutions and sets current resolution as default value
-
     }
 
     private void InitializeResolutionDropDown()
@@ -45,6 +43,7 @@ public class GraphicsSettings : MonoBehaviour
         resolutionDropdown.AddOptions(options);
         resolutionDropdown.value = currentResolutionIndex;
         resolutionDropdown.RefreshShownValue();
+        resolutionDropdown.onValueChanged.AddListener(SetResolution);
     }
 
     private void InitializeSavedSettings()

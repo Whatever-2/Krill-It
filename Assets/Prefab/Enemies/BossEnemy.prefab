@@ -11,12 +11,13 @@ GameObject:
   - component: {fileID: 7022171843305856221}
   - component: {fileID: 8206506538148874655}
   - component: {fileID: 1361462939354521057}
-  - component: {fileID: 1183362936715022833}
+  - component: {fileID: 7047744374972756530}
   - component: {fileID: 1011246744247702907}
   - component: {fileID: 3028801569981671122}
   - component: {fileID: 4789763727598776770}
   - component: {fileID: 5495926626776779465}
   - component: {fileID: 7027221259955152148}
+  - component: {fileID: 4182905608017998633}
   m_Layer: 0
   m_Name: BossEnemy
   m_TagString: Enemy
@@ -125,8 +126,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!70 &1183362936715022833
-CapsuleCollider2D:
+--- !u!61 &7047744374972756530
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -159,9 +160,18 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.017398713, y: -0.04636026}
-  m_Size: {x: 0.4139727, y: 0.32613826}
-  m_Direction: 1
+  m_Offset: {x: 0.03324282, y: -0.02507817}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.48, y: 0.47}
+    newSize: {x: 1, y: 2}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 0.3808548, y: 0.30086815}
+  m_EdgeRadius: 0
 --- !u!114 &1011246744247702907
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,7 +186,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStats
   damage: 15
   playerHealth: {fileID: 5235082998078329162, guid: 8d1e2f04d9b75994596d17000d2cee7f, type: 3}
-  EHealth: 250
+  EHealth: 100
   currentHealth: 0
   moneyPrefab: {fileID: 9049635820693340342, guid: 90acc81ced910244aa3a0d950227d766, type: 3}
   minMoneyDrop: 1
@@ -223,10 +233,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: AstarPathfindingProject::Pathfinding.AIPath
   version: 5
-  radius: 0.68
+  radius: 0.25
   height: 0.96
   canMove: 1
-  maxSpeed: 3
+  maxSpeed: 1
   gravity: {x: NaN, y: NaN, z: NaN}
   groundMask:
     serializedVersion: 2
@@ -288,3 +298,15 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4182905608017998633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5198502963567591098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e04bb9a438787e84e80da9c115c4b747, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UnstuckHelp

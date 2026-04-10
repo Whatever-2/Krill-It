@@ -11,12 +11,13 @@ GameObject:
   - component: {fileID: 8634004077008889053}
   - component: {fileID: 5726204797763129252}
   - component: {fileID: 2836272703823637381}
-  - component: {fileID: 5082432200193075314}
+  - component: {fileID: 450777163047206099}
   - component: {fileID: 4263926928837513552}
   - component: {fileID: 7305902830787334026}
   - component: {fileID: 7799953399375332446}
   - component: {fileID: 718818271540865538}
   - component: {fileID: 6097166557833074916}
+  - component: {fileID: -2785810611625896482}
   m_Layer: 0
   m_Name: Enemy1
   m_TagString: Enemy
@@ -110,7 +111,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 0.0001
+  m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0
   m_GravityScale: 0
@@ -125,8 +126,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!70 &5082432200193075314
-CapsuleCollider2D:
+--- !u!61 &450777163047206099
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -159,9 +160,18 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.007001773, y: 0}
-  m_Size: {x: 0.98599666, y: 2}
-  m_Direction: 0
+  m_Offset: {x: 0.022315152, y: -0.022315577}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.48, y: 0.47}
+    newSize: {x: 1, y: 2}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 0.36098552, y: 0.29891405}
+  m_EdgeRadius: 0
 --- !u!114 &4263926928837513552
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,7 +186,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStats
   damage: 2
   playerHealth: {fileID: 5235082998078329162, guid: 8d1e2f04d9b75994596d17000d2cee7f, type: 3}
-  EHealth: 75
+  EHealth: 25
   currentHealth: 0
   moneyPrefab: {fileID: 9049635820693340342, guid: 90acc81ced910244aa3a0d950227d766, type: 3}
   minMoneyDrop: 1
@@ -223,10 +233,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: AstarPathfindingProject::Pathfinding.AIPath
   version: 5
-  radius: 0.68
+  radius: 0.25
   height: 0.96
   canMove: 1
-  maxSpeed: 5
+  maxSpeed: 3
   gravity: {x: 0, y: 0, z: 0}
   groundMask:
     serializedVersion: 2
@@ -238,7 +248,7 @@ MonoBehaviour:
   enableRotation: 0
   autoRepath:
     mode: 2
-    interval: 0.5
+    interval: 1
     sensitivity: 10
     maximumInterval: 2
     visualizeSensitivity: 0
@@ -288,3 +298,15 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-2785810611625896482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3196870929652551686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e04bb9a438787e84e80da9c115c4b747, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'

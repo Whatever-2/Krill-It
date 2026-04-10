@@ -63,8 +63,9 @@ public class WaveTimer : MonoBehaviour
         gameStopped = true;
     }
 
-    void LoadNextScene()
+    public int CurrentWave()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        return currentWave;
     }
+
 }

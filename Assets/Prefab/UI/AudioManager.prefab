@@ -56,8 +56,9 @@ MonoBehaviour:
   BGM:
   - {fileID: 8300000, guid: eb420d17e606b894ab6c58278bdddd97, type: 3}
   - {fileID: 8300000, guid: da43f91c2d0a3a746b032da10e1f0bec, type: 3}
-  - {fileID: 8300000, guid: da43f91c2d0a3a746b032da10e1f0bec, type: 3}
-  BGMSceneIndex: 000000000100000002000000
+  - {fileID: 8300000, guid: b2418dbe7f6408d4683a01d20f9bb573, type: 3}
+  - {fileID: 8300000, guid: 58873bb6e0ef9b1459ae04c5c336e321, type: 3}
+  BGMSceneIndex: 00000000010000000200000003000000
   SFX:
   - {fileID: 8300000, guid: 40009171c836ef24d9d6461457031481, type: 3}
   - {fileID: 8300000, guid: ce7078d244403294aaba5a2c0be31710, type: 3}

@@ -278,6 +278,7 @@ MonoBehaviour:
   shootRangeScale: {x: 1, y: 1}
   shootRangeActive: 0
   isHoming: 0
+  isContinuousAttack: 0
   FirePoint: {fileID: 3401611918476569570}
   trajectoryAnimationCurve:
     serializedVersion: 2
@@ -314,7 +315,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   bulletTravelTime: 0.75
   bulletHeight: 0.85
-  shooterTimer: 3
+  shooterTimer: 4
   AttackAnimation: {fileID: 7400000, guid: 77289fda14dd3df48836f0572502c3e7, type: 2}
 --- !u!50 &3202927769624078627
 Rigidbody2D:

@@ -189,8 +189,8 @@ MonoBehaviour:
   EHealth: 75
   currentHealth: 0
   moneyPrefab: {fileID: 9049635820693340342, guid: 90acc81ced910244aa3a0d950227d766, type: 3}
-  minMoneyDrop: 20
-  maxMoneyDrop: 30
+  minMoneyDrop: 15
+  maxMoneyDrop: 20
   dropForce: 2
 --- !u!114 &6644624380095308543
 MonoBehaviour:

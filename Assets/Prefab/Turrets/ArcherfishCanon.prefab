@@ -273,10 +273,11 @@ MonoBehaviour:
   mainCamera: {fileID: 0}
   bulletPrefab: {fileID: 1965508325764084639, guid: 4630c5eb2e7b75542b5c3d0ea456fafc, type: 3}
   shootRange: {fileID: 1384865775418542032}
-  shootRangeDistance: 4
+  shootRangeDistance: 7
   shootRangeScale: {x: 1, y: 1}
   shootRangeActive: 0
   isHoming: 1
+  isContinuousAttack: 0
   FirePoint: {fileID: 1355568831955481932}
   trajectoryAnimationCurve:
     serializedVersion: 2

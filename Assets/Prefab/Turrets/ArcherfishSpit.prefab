@@ -89,7 +89,7 @@ SpriteRenderer:
   m_SortingOrder: 11
   m_MaskInteraction: 0
   m_Sprite: {fileID: -792529263538145878, guid: 99f97a8fc2f41664fa16956b7a6e953b, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.75931084, b: 0.4481132, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -151,7 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 370099addc6db954dbebd5c26e107e46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GunStats
-  damage: 25
+  damage: 30
   enemyHealth: {fileID: 4263926928837513552, guid: 3ab3444a5fe9e634bbfdaea57eeb2b42, type: 3}
 --- !u!58 &986846587203909466
 CircleCollider2D:

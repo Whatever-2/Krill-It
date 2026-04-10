@@ -26,6 +26,15 @@ public class WaveTimer : MonoBehaviour
     {
         if (gameStopped) return;
 
+        //checks if there are still enemies at large
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            
+            //ends wave early if all krill have been krilled
+            if (enemies.Length == 0)
+            {
+                EndWave();
+            }
+
         if (currentTime > 0)
         {
             currentTime -= Time.deltaTime;
@@ -52,9 +61,14 @@ public class WaveTimer : MonoBehaviour
             currentWave++;
             StartWave();
         }
-        else
+        else if (currentWave >= totalWaves)
         {
-            StopGame();
+            //checks if there are still enemies at large
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            if (enemies.Length == 0)
+            {
+                StopGame();
+            }
         }
     }
 

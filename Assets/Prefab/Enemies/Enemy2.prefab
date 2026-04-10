@@ -174,13 +174,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aae54af6a3d7e7949a4d6e3fd3f10f6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStats
-  damage: 10
-  playerHealth: {fileID: 1863450240898844978, guid: b03b72f8dc239e749b8d6d21daa0392b, type: 3}
-  EHealth: 100
-  currentHealth: 100
-  moneyPrefab: {fileID: 3759548983540232078, guid: 0df8bcd1408142a41aaa866999969679, type: 3}
+  damage: 6
+  playerHealth: {fileID: 5235082998078329162, guid: 8d1e2f04d9b75994596d17000d2cee7f, type: 3}
+  EHealth: 45
+  currentHealth: 0
+  moneyPrefab: {fileID: 9049635820693340342, guid: 90acc81ced910244aa3a0d950227d766, type: 3}
   minMoneyDrop: 1
-  maxMoneyDrop: 5
+  maxMoneyDrop: 3
   dropForce: 2
 --- !u!114 &6272190182097091029
 MonoBehaviour:
@@ -226,7 +226,7 @@ MonoBehaviour:
   radius: 0.68
   height: 0.96
   canMove: 1
-  maxSpeed: 1
+  maxSpeed: 6
   gravity: {x: NaN, y: NaN, z: NaN}
   groundMask:
     serializedVersion: 2
@@ -265,7 +265,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: AstarPathfindingProject::Pathfinding.AIDestinationSetter
   version: 1
-  target: {fileID: 3094362936672209473, guid: b03b72f8dc239e749b8d6d21daa0392b, type: 3}
+  target: {fileID: 5504431427488415502, guid: 8d1e2f04d9b75994596d17000d2cee7f, type: 3}
 --- !u!95 &8672952561981806298
 Animator:
   serializedVersion: 7

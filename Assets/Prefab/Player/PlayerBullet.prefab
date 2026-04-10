@@ -158,8 +158,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 370099addc6db954dbebd5c26e107e46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GunStats
-  damage: 50
-  enemyHealth: {fileID: 4263926928837513552, guid: 3ab3444a5fe9e634bbfdaea57eeb2b42, type: 3}
+  damage: 15
+  enemyHealth: {fileID: 4263926928837513552, guid: 2ba6536ab43e1db4ebb129d6bbb5d277, type: 3}
 --- !u!58 &2535712698271188511
 CircleCollider2D:
   m_ObjectHideFlags: 0

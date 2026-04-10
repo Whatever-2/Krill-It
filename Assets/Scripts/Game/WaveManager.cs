@@ -16,16 +16,58 @@ public class Wave
 
 public class WaveManager : MonoBehaviour
 {
+    
     public WaveTimer waveTimer;
     public Transform[] spawnPoints;
     public List<Wave> waves;
+
+    public GameObject playerPrefab;
+    public Transform playerSpawnPoint;
+    public float respawnDelay = 2f;
+
+    private GameObject currentPlayer;
+    private float respawnTimer;
+    private bool isRespawning;
 
     void Awake()
     {
         waveTimer.OnWaveStart += StartWave;
     }
 
-    void StartWave(int waveIndex)
+    void Start()
+    {
+        SpawnPlayer();
+    }
+
+    void Update()
+    {
+        if (currentPlayer == null && !isRespawning)
+        {
+            isRespawning = true;
+            respawnTimer = respawnDelay;
+        }
+
+        if (isRespawning)
+        {
+            respawnTimer -= Time.deltaTime;
+
+            if (respawnTimer <= 0f)
+            {
+                SpawnPlayer();
+                isRespawning = false;
+            }
+        }
+    }
+
+    void SpawnPlayer()//function to instantiate the player at the spawn point when the game starts or when the player dies and needs to respawn
+    {
+        if (playerPrefab != null && playerSpawnPoint != null)
+        {
+            currentPlayer = Instantiate(playerPrefab, playerSpawnPoint.position, playerSpawnPoint.rotation);
+        }
+    }
+
+    void StartWave(int waveIndex)//function to start a wave of enemies based on the wave index provided by the WaveTimer script
     {
         if (waveIndex - 1 >= waves.Count) return;
 
@@ -42,7 +84,7 @@ public class WaveManager : MonoBehaviour
         }
     }
 
-    void SpawnEnemy(GameObject enemy)
+    void SpawnEnemy(GameObject enemy)//function to instantiate enemies at random spawn points when a wave starts
     {
         int random = Random.Range(0, spawnPoints.Length);
         Instantiate(enemy, spawnPoints[random].position, spawnPoints[random].rotation);
